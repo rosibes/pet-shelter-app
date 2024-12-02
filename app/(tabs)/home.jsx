@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
     borderStyle:'dashed',
     justifyContent:'center'
   }
-})
+});

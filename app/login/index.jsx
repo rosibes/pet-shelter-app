@@ -6,7 +6,8 @@ import * as WebBrowser from 'expo-web-browser';
 import { useOAuth, useUser } from '@clerk/clerk-expo';
 import * as Linking from 'expo-linking';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Logo from "@/assets/images/logo_site2.png";
+import Logo from "@/assets/images/avatar.png";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 // Custom hook to warm up the browser for better UX
 export const useWarmUpBrowser = () => {
@@ -60,16 +61,29 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
-            <Text style={styles.title}>Pet Shelter</Text>
 
       <Image
         source={Logo}style={styles.image}
       />
+                  <Text style={styles.title}>Pet Shelter</Text>
+
       <Text style={styles.subtitle}>
-Looking to own a pet?      </Text>
+Here you can meet your dream friend an joy with them      </Text>
+
 
       <Pressable onPress={onPress} style={styles.button}>
+        <View style={{
+          display:'flex',
+          flexDirection:'row',
+          gap:10,
+          justifyContent:'center',
+          alignItems:'center',
+
+        }}>
         <Text style={styles.buttonText}>Get started</Text>
+        <MaterialIcons name="pets" size={24} color="white" />
+        </View>
+      
       </Pressable>
 
 
@@ -85,26 +99,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    width: 300,
-    height: 300,
-    marginBottom: 10,
+    width: 400,
+    height: 400,
+    marginBottom: 1,
+      resizeMode: 'contain'
+    
   },
   title: {
     color: '#3C3C3B',
-    fontFamily: 'PTMono',
+    fontFamily: 'euclid_bold',
     fontSize: 40,
     textAlign: 'center',
     paddingLeft: 20,
     paddingRight: 20,
   },
   subtitle: {
-    fontFamily: 'PTMono',
+    fontFamily: 'euclid_reg',
     fontSize: 15,
     textAlign: 'center',
     paddingTop: 10,
     paddingLeft: 20,
     paddingRight: 20,
-    marginBottom: 10,
+    marginBottom: 50,
     color: Colors.VIOLET,
   },
   button: {
@@ -115,7 +131,7 @@ const styles = StyleSheet.create({
     marginBottom: 100,
   },
   buttonText: {
-    fontFamily: 'PTMono',
+    fontFamily: 'euclid_medium',
     color: 'white',
     textAlign: 'center',
     fontSize: 20

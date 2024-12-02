@@ -43,6 +43,11 @@ export default function RootLayout() {
     'robonto_medium': require('./../assets/fonts/Roboto-Medium.ttf'),
     'robonto_bold': require('./../assets/fonts/Roboto-Bold.ttf'),
     'PTMono': require('./../assets/fonts/PTMono-Regular.ttf'),
+    'euclid_bold' : require('./../assets/fonts/Euclid Circular B Bold.ttf'),
+    'euclid_reg' : require('./../assets/fonts/Euclid Circular B Regular.ttf'),
+    'euclid_medium' : require('./../assets/fonts/Euclid Circular B Medium.ttf')
+
+
   });
 
   return (

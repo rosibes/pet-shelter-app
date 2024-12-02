@@ -18,8 +18,15 @@ export default function PetListItem({ pet }) {
 
       {/* Secțiunea textului */}
       <View style={styles.textContainer}>
+        <View style={{
+          display:'flex',
+          flexDirection:'row',
+          justifyContent:'space-between',
+          //alignItems:'center'
+        }}>
         <Text style={styles.nameText}>{pet?.name || 'Unknown Name'}</Text>
         <Text style={styles.breedText}>{'(' + (pet.breed || 'Unknown Breed') + ')'}</Text>
+        </View>
         <Text style={styles.detailsText}>{pet.sex + ', ' + pet.age} yrs.</Text>
       </View>
     </View>
@@ -49,18 +56,19 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
   },
   nameText: {
-    color: Colors.BROWN,
+    color: 'white',
     fontFamily: 'robonto_bold',
     fontSize: 18,
     marginBottom: 5,
   },
   breedText: {
-    color: Colors.BROWN,
+    color: 'white',
     fontFamily: 'robonto_medium',
     fontSize: 12,
+    marginTop:3
   },
   detailsText: {
-    color: Colors.VIOLET,
+    color: Colors.SALMON,
     fontFamily: 'robonto_medium',
     fontSize: 12,
     marginTop: 5,
