@@ -6,12 +6,12 @@ import { useRouter } from 'expo-router';
 const screenWidth = Dimensions.get('window').width; // Lățimea ecranului
 const cardWidth = (screenWidth - 80) / 2; // Două elemente per rând cu spațiu între ele
 
-export default function PetListItem({ pet }) {
+export default function PetListItem({pet}) {
   const router = useRouter();
   return (
     <TouchableOpacity 
     onPress={()=>router.push({
-      pathname:'pet-details',
+      pathname:'/pet_details',
       params:pet
     })}
     style={[styles.itemContainer, { width: cardWidth }]}>
@@ -34,7 +34,13 @@ export default function PetListItem({ pet }) {
         <Text style={styles.nameText}>{pet?.name || 'Unknown Name'}</Text>
         <Text style={styles.breedText}>{'(' + (pet.breed || 'Unknown Breed') + ')'}</Text>
         </View>
+        <View style={{
+          backgroundColor:Colors.VIOLET,
+          borderRadius:12,
+          alignContent:'center'
+        }}>
         <Text style={styles.detailsText}>{pet.sex + ', ' + pet.age} yrs.</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -58,24 +64,24 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     padding: 7,
-    backgroundColor: Colors.GOLDENROD,
+    backgroundColor: "white",
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
   },
   nameText: {
-    color: 'white',
+    color: Colors.BROWN,
     fontFamily: 'robonto_bold',
     fontSize: 18,
     marginBottom: 5,
   },
   breedText: {
-    color: 'white',
+    color: Colors.SALMON,
     fontFamily: 'robonto_medium',
     fontSize: 12,
     marginTop:3
   },
   detailsText: {
-    color: Colors.SALMON,
+    color: Colors.ALBASTRU,
     fontFamily: 'robonto_medium',
     fontSize: 12,
     marginTop: 5,

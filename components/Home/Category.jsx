@@ -22,8 +22,7 @@ export default function Category({ category, selectedCategory }) {
   };
 
   return (
-    <View style={{ marginTop: 20 }}>
-      <Text style={{ fontFamily: 'PTMono', fontSize: 15 }}>Category</Text>
+    <View style={{ marginTop: 10 }}>
 
       <FlatList
         data={categoryList}
@@ -64,9 +63,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.GOLDENROD,
     padding: 15,
     alignItems: 'center',
-    borderWidth: 1,
+   //borderWidth: 1,
     borderRadius: 15,
-    borderColor: Colors.SALMON,
+   // borderColor: Colors.SALMON,
     margin: 3,
   },
   selectedCategoryContainer: {

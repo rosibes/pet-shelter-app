@@ -12,13 +12,7 @@ export default function Home() {
 
   const handleSearch = (breed) => {
     // Dacă există un breed, schimbăm categoria în funcție de breed-ul căutat
-    if (breed === 'Labrador' || breed === 'Bulldog') {
-      setSelectedCategory('Dogs');
-    } else if (breed === 'Persian' || breed === 'Siamese') {
-      setSelectedCategory('Cats');
-    } else {
-      setSelectedCategory('Others'); // Poti adauga mai multe categorii aici
-    }
+ 
     
     searchPetByBreed.current?.(breed); // Apelăm funcția de căutare
   };
@@ -28,8 +22,8 @@ export default function Home() {
       {/* HEADER */}
       <Header onSearch={handleSearch} />
 
-      {/* SLIDER */}
-      <Slider />
+      {/* SLIDER 
+      <Slider />*/}
 
       {/* PetList + CATEGORY */}
       <PetListByCategory

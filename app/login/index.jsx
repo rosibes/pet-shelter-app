@@ -27,12 +27,12 @@ export default function LoginScreen() {
   const { startOAuthFlow } = useOAuth({ strategy: 'oauth_google' });
   const { user, isSignedIn } = useUser();
 
-  useEffect(() => {
-    // Redirect to home if user is already signed in
-    if (isSignedIn) {
-      Linking.openURL(Linking.createURL('/home', { scheme: 'myapp' }));
-    }
-  }, [isSignedIn]);
+  // useEffect(() => {
+  //   // Redirect to home if user is already signed in
+  //   if (isSignedIn) {
+  //     Linking.openURL(Linking.createURL('/home', { scheme: 'myapp' }));
+  //   }
+  // }, [isSignedIn]);
 
   const onPress = useCallback(async () => {
     try {
@@ -136,4 +136,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18
   },
-});
+})

@@ -1,11 +1,11 @@
 import { View, Text,ScrollView, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { useEffect } from 'react'
 import { useLocalSearchParams, useNavigation } from 'expo-router'
-//import PetInfo from '../../components/Home/PetDetails/PetInfo';
-//import PetSubInfo from '../../components/Home/PetDetails/PetSubInfo';
-//import AboutPet from '../../components/Home/PetDetails/AboutPet';
-//import OwnerInfo from '../../components/Home/PetDetails/OwnerInfo';
 import Colors from '@/constants/Colors';
+import PetInfo from '../../components/PetDetails/PetInfo';
+import PetSubInfo from '../../components/PetDetails/PetSubInfo';
+import AboutPet from '../../components/PetDetails/AboutPet';
+import OwnerInfo from '../../components/PetDetails/OwnerInfo';
 
 export default function PetDetails() {
     const pet = useLocalSearchParams();  //we get the infos
@@ -23,9 +23,9 @@ export default function PetDetails() {
         <ScrollView>            
     {/*Pet Info*/}
         <PetInfo pet={pet}/>
-    {/*Pet Properties*/}
+    {/*Pet Properties */}
         <PetSubInfo pet={pet}/>
-    {/*About*/}
+    {/*About */}
         <AboutPet pet={pet}/>
     {/*Owner Details*/}
         <OwnerInfo pet={pet}/>
