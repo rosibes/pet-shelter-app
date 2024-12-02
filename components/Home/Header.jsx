@@ -2,38 +2,41 @@ import { Image, Pressable, StyleSheet, Text, TextInput, View } from "react-nativ
 import Colors from "../../constants/Colors";
 import { useUser } from "@clerk/clerk-expo";
 import { FontAwesome } from "@expo/vector-icons";
+import { useState } from "react";
 
-export default function Header() {
-    const { user } = useUser();
-  
-    return (
-      <View style={styles.container}>
-        {/* Header cu nume și avatar */}
-        <View style={styles.header}>
-          <View>
-            <Text style={styles.welcomeText}>Welcome,</Text>
-            <Text style={styles.userName}>{user?.fullName}</Text>
-          </View>
-          <Image
-            source={{ uri: user?.imageUrl }}
-            style={styles.avatar}
-          />
+export default function Header({ onSearch }) {
+  const { user } = useUser();
+  const [searchText, setSearchText] = useState('');
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <View>
+          <Text style={styles.welcomeText}>Welcome,</Text>
+          <Text style={styles.userName}>{user?.fullName}</Text>
         </View>
-  
-        {/* Buton de Search */}
-        <View style={styles.searchContainer}>
-          <TextInput
-            placeholder="Search for pets"
-            placeholderTextColor='black'
-            style={styles.searchInput}
-          />
-          <Pressable style={styles.searchButton}>
-            <FontAwesome name="search" size={16} color="white" />
-          </Pressable>
-        </View>
+        <Image source={{ uri: user?.imageUrl }} style={styles.avatar} />
       </View>
-    );
-  }
+
+      <View style={styles.searchContainer}>
+        <TextInput
+          placeholder="Search for breeds"
+          placeholderTextColor="black"
+          style={styles.searchInput}
+          value={searchText}
+          onChangeText={(text) => setSearchText(text)}
+        />
+        <Pressable
+          style={styles.searchButton}
+          onPress={() => onSearch(searchText)}
+        >
+          <FontAwesome name="search" size={16} color="white" />
+        </Pressable>
+      </View>
+    </View>
+  );
+}
+
   
   const styles = StyleSheet.create({
     container: {

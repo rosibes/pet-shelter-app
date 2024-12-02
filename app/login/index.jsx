@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   title: {
     color: '#3C3C3B',
     fontFamily: 'euclid_bold',
-    fontSize: 40,
+    fontSize: 35,
     textAlign: 'center',
     paddingLeft: 20,
     paddingRight: 20,
@@ -134,6 +134,6 @@ const styles = StyleSheet.create({
     fontFamily: 'euclid_medium',
     color: 'white',
     textAlign: 'center',
-    fontSize: 20
+    fontSize: 18
   },
 });

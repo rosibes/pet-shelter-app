@@ -1,53 +1,63 @@
-import { View, Text, FlatList } from 'react-native'
-import React, { useEffect, useState} from 'react'
-import Category from './Category'
-import { collection, getDocs, query, where } from 'firebase/firestore/lite'
-import { db } from '../../config/FirebaseConfig'
-import PetListItem from './PetListItem'
+import { View, FlatList } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import Category from './Category';
+import { collection, getDocs, query, where } from 'firebase/firestore/lite';
+import { db } from '../../config/FirebaseConfig';
+import PetListItem from './PetListItem';
 
-
-
-export default function PetListByCategory() {
-
-  const[petList, setPetList] = useState([]);
-  const[loader,setLoader] = useState(false);
+export default function PetListByCategory({ onSearch }) {
+  const [petList, setPetList] = useState([]);
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
-    GetPetList('Dogs');
-  }, []); // Adaugă un array gol pentru a apela doar la montarea componentului
+    GetPetList('Dogs'); // Categorie implicită
+  }, []);
 
-  // luam Lista de Animale in functie de categorie
-  const GetPetList = async (category) => {
+  const GetPetList = async (category = null, breed = null) => {
+    setLoader(true);
     setPetList([]); // Resetăm lista
-    const q = query(collection(db, 'Pets'), where('category', '==', category));
+
+    let q;
+    if (breed) {
+      q = query(collection(db, 'Pets'), where('breed', '==', breed));
+    } else if (category) {
+      q = query(collection(db, 'Pets'), where('category', '==', category));
+    } else {
+      q = collection(db, 'Pets'); // Fetch all pets dacă nu avem filtre
+    }
+
     const querySnapshot = await getDocs(q);
-  
+
     if (querySnapshot.empty) {
-      console.log('No pets found for category: ${category}');
+      console.log(`No pets found for the filter.`);
+      setLoader(false);
       return;
     }
-  
 
     querySnapshot.forEach((doc) => {
-      setPetList(petList=>[...petList,doc.data()])
+      setPetList((prevList) => [...prevList, doc.data()]);
     });
     setLoader(false);
   };
-  
+
+  // Expune funcția GetPetList către părinți
+  useEffect(() => {
+    if (onSearch) {
+      onSearch((breed) => GetPetList(null, breed));
+    }
+  }, [onSearch]);
 
   return (
     <View>
-      <Category category={(value)=>GetPetList(value)}/>
-        <FlatList
-        style={{marginTop:10}}
-        horizontal = {true}
+      <Category category={(value) => GetPetList(value)} />
+      <FlatList
+        style={{ marginTop: 10 }}
+        horizontal={true}
         refreshing={loader}
-        onRefresh={()=>GetPetList('Dogs')}
+        onRefresh={() => GetPetList('Dogs')}
         data={petList}
-        renderItem={({item, index})=>(
-          <PetListItem pet={item}/>
-        )}
-        />
+        renderItem={({ item }) => <PetListItem pet={item} />}
+      />
     </View>
-  )
+  );
 }
