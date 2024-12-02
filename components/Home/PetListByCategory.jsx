@@ -5,13 +5,13 @@ import { collection, getDocs, query, where } from 'firebase/firestore/lite';
 import { db } from '../../config/FirebaseConfig';
 import PetListItem from './PetListItem';
 
-export default function PetListByCategory({ onSearch }) {
+export default function PetListByCategory({ onSearch, selectedCategory }) {
   const [petList, setPetList] = useState([]);
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
-    GetPetList('Dogs'); // Categorie implicită
-  }, []);
+    GetPetList(selectedCategory); // Căutăm pe baza categoriei selectate
+  }, [selectedCategory]); // Se actualizează când categoria se schimbă
 
   const GetPetList = async (category = null, breed = null) => {
     setLoader(true);
@@ -49,7 +49,7 @@ export default function PetListByCategory({ onSearch }) {
 
   return (
     <View>
-      <Category category={(value) => GetPetList(value)} />
+      <Category category={(value) => GetPetList(value)} selectedCategory={selectedCategory} />
       <FlatList
         style={{ marginTop: 10 }}
         horizontal={true}

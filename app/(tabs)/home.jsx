@@ -8,17 +8,33 @@ import Slider from '../../components/Home/Slider';
 
 export default function Home() {
   const searchPetByBreed = useRef(null); // Referință pentru funcția de căutare
+  const [selectedCategory, setSelectedCategory] = useState('Dogs'); // Starea pentru categoria selectată
+
+  const handleSearch = (breed) => {
+    // Dacă există un breed, schimbăm categoria în funcție de breed-ul căutat
+    if (breed === 'Labrador' || breed === 'Bulldog') {
+      setSelectedCategory('Dogs');
+    } else if (breed === 'Persian' || breed === 'Siamese') {
+      setSelectedCategory('Cats');
+    } else {
+      setSelectedCategory('Others'); // Poti adauga mai multe categorii aici
+    }
+    
+    searchPetByBreed.current?.(breed); // Apelăm funcția de căutare
+  };
 
   return (
     <View style={{ padding: 20, marginTop: 10 }}>
       {/* HEADER */}
-      <Header onSearch={(breed) => searchPetByBreed.current?.(breed)} />
+      <Header onSearch={handleSearch} />
 
       {/* SLIDER */}
       <Slider />
 
       {/* PetList + CATEGORY */}
-      <PetListByCategory onSearch={(callback) => (searchPetByBreed.current = callback)} />
+      <PetListByCategory
+        onSearch={(callback) => (searchPetByBreed.current = callback)}
+      />
 
       {/* ADD NEW PET OPTION */}
       <TouchableOpacity style={styles.addNewPetContainer}>
@@ -37,6 +53,7 @@ export default function Home() {
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   addNewPetContainer: {

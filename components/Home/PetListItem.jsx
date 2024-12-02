@@ -1,13 +1,20 @@
-import { View, Text, Image, Dimensions, StyleSheet } from 'react-native';
+import { View, Text, Image, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
 import Colors from '@/constants/Colors';
+import { useRouter } from 'expo-router';
 
 const screenWidth = Dimensions.get('window').width; // Lățimea ecranului
 const cardWidth = (screenWidth - 80) / 2; // Două elemente per rând cu spațiu între ele
 
 export default function PetListItem({ pet }) {
+  const router = useRouter();
   return (
-    <View style={[styles.itemContainer, { width: cardWidth }]}>
+    <TouchableOpacity 
+    onPress={()=>router.push({
+      pathname:'pet-details',
+      params:pet
+    })}
+    style={[styles.itemContainer, { width: cardWidth }]}>
       {/* Secțiunea imaginii */}
       <View style={styles.imageContainer}>
         <Image
@@ -29,7 +36,7 @@ export default function PetListItem({ pet }) {
         </View>
         <Text style={styles.detailsText}>{pet.sex + ', ' + pet.age} yrs.</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

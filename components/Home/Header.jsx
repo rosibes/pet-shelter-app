@@ -20,7 +20,7 @@ export default function Header({ onSearch }) {
 
       <View style={styles.searchContainer}>
         <TextInput
-          placeholder="Search for breeds"
+          placeholder="Search for pets"
           placeholderTextColor="black"
           style={styles.searchInput}
           value={searchText}
