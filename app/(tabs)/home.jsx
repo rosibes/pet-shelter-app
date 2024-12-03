@@ -11,7 +11,6 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState('Dogs'); // Starea pentru categoria selectată
 
   const handleSearch = (breed) => {
-    // Dacă există un breed, schimbăm categoria în funcție de breed-ul căutat
  
     
     searchPetByBreed.current?.(breed); // Apelăm funcția de căutare
